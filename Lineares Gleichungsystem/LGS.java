@@ -21,4 +21,10 @@ public class LGS {
         matrix[2][3] = 1;
 
     }
+
+    public static void addieren(int a, int b, double x) {
+        for (int i = 0; i < 4; i++) {
+            matrix[a][i] += matrix[b][i] * x;
+        }
+    }
 }
