@@ -3,7 +3,8 @@ public class LGS {
     static double[][] matrix = new double[3][4];
     public static void main(String[] args) {
         erstellen();
-        System.out.println(matrix);
+        addieren(2, 0, -2);
+        ausgeben();
     }
 
     public static void erstellen() {
@@ -25,6 +26,16 @@ public class LGS {
     public static void addieren(int a, int b, double x) {
         for (int i = 0; i < 4; i++) {
             matrix[a][i] += matrix[b][i] * x;
+        }
+    }
+
+    public static void ausgeben() {
+        for (double[] row : matrix) {
+            for (double num : row) {
+                System.out.print(num);
+                System.out.print(" ");
+            }
+            System.out.println();
         }
     }
 }
