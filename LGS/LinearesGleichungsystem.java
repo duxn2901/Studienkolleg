@@ -44,6 +44,7 @@ public class LinearesGleichungsystem {
             }
             System.out.println();
         }
+        System.out.println();
     }
 
     public static void multiplizieren(int zeile, double x) {
@@ -92,7 +93,7 @@ public class LinearesGleichungsystem {
     public static void vertauschen(int zeil1, int zeil2) {
         for (int i = 0; i < spalte_anzahl; i++) {
             double temp = matrix[zeil1][i];
-            matrix[zeil1][i] = matrix[zeil1][i];
+            matrix[zeil1][i] = matrix[zeil2][i];
             matrix[zeil2][i] = temp;
         }
     }
@@ -100,7 +101,7 @@ public class LinearesGleichungsystem {
     public static void loesen2() {
         //loop fuer alle pivoten [p][p] 
         for (int pivot = 0; pivot < zeile_anzahl; pivot++) {
-
+            ausgeben();
             //um ein pivot != 0 zu finden
             if (matrix[pivot][pivot] == 0) {
                 int zeilNow = pivot + 1;
@@ -113,19 +114,20 @@ public class LinearesGleichungsystem {
                     zeilNow++;
                 }
             }
-
+            ausgeben();
             //pivot zu 1 multiplizieren wenn pivot != 0
             if (matrix[pivot][pivot] != 0)
                 multiplizieren(pivot, 1/(matrix[pivot][pivot]));
             
-                
+            ausgeben();
             //spalten unter pivot nullen
-
-            // for (int zeile = zeile_pivot+1; zeile < zeile_anzahl; zeile++) {
-            //     if (matrix[zeile][spalte_pivot] != 0) {
-            //         addieren(zeile, zeile_pivot, -1*matrix[zeile][spalte_pivot]);
-            //     }
-            // }
+            
+            for (int zeilNow = pivot+1; zeilNow < zeile_anzahl; zeilNow++) { //alle zeile unter pivot
+                if (matrix[zeilNow][pivot] != 0) { //wenn die zahl unter pivot != 0
+                    addieren(zeilNow, pivot, -1*matrix[zeilNow][pivot]); //addieren von zeil pivot zu zeilNow
+                }
+            }
+            ausgeben();
         }
         ausgeben();
     }
