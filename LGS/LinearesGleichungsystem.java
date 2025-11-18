@@ -1,6 +1,6 @@
 import java.util.Scanner;
 
-public class LGS {
+public class LinearesGleichungsystem {
     
     static double[][] matrix = new double[3][4];
     static int zeile_anzahl = 3;
