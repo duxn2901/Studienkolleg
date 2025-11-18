@@ -100,8 +100,9 @@ public class LinearesGleichungsystem {
 
     public static void loesungablesen() {
         for (int zeil = 0; zeil < zeile_anzahl; zeil++) {
-            char variable = (char) ('a' + zeil); //type casting into making a letter from a->z
-            System.out.println(variable + " = " + matrix[zeil][spalte_anzahl-1]);
+            char variable = (char) ('a' + zeil); //type casting um ein char a->z zu nehmen
+            String result = String.format("%.3f", matrix[zeil][spalte_anzahl-1]); //string format um nur 3 nachkommastellen darzustellen
+            System.out.println(variable + " = " + result);
         }
     }
 
