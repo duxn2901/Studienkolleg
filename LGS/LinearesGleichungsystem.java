@@ -98,6 +98,13 @@ public class LinearesGleichungsystem {
         }
     }
 
+    public static void loesungablesen() {
+        for (int zeil = 0; zeil < zeile_anzahl; zeil++) {
+            char variable = (char) ('a' + zeil); //type casting into making a letter from a->z
+            System.out.println(variable + " = " + matrix[zeil][spalte_anzahl-1]);
+        }
+    }
+
     public static void loesen2() {
         //loop fuer alle pivoten [p][p] 
         for (int pivot = 0; pivot < zeile_anzahl; pivot++) {
@@ -142,6 +149,6 @@ public class LinearesGleichungsystem {
             System.out.println("remove all numbers on top of pivot of line " + (pivot+1)); //TODO entfernen
             ausgeben();
         }
-        ausgeben();
+        loesungablesen();
     }
 }
