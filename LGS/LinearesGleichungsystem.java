@@ -6,8 +6,8 @@ public class LinearesGleichungsystem {
     static int zeile_anzahl = 3;
     static int spalte_anzahl = 4;
     public static void main(String[] args) {
-        erstellen();
-        // eingeben();
+        // erstellen();
+        eingeben();
         // loesen();
         loesen2();
         // ausgeben();
@@ -81,8 +81,8 @@ public class LinearesGleichungsystem {
 
     public static void eingeben() {
         Scanner scan = new Scanner(System.in);
-        for (int zeile = 0; zeile < 3; zeile++) {
-            for (int spalte = 0; spalte < 4; spalte++) {
+        for (int zeile = 0; zeile < zeile_anzahl; zeile++) {
+            for (int spalte = 0; spalte < spalte_anzahl; spalte++) {
                 System.out.println("matrix[" + zeile + "][" + spalte + "] = ");
                 matrix[zeile][spalte] = scan.nextDouble();
             }
