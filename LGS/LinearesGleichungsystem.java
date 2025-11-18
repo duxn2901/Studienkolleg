@@ -10,7 +10,7 @@ public class LinearesGleichungsystem {
         // eingeben();
         // loesen();
         loesen2();
-        ausgeben();
+        // ausgeben();
     }
 
     //nicht mehr gebraucht
@@ -20,11 +20,11 @@ public class LinearesGleichungsystem {
         matrix[0][2] = 0;
         matrix[0][3] = 1;
         matrix[1][0] = 1;
-        matrix[1][1] = 0;
-        matrix[1][2] = 0;
+        matrix[1][1] = 2;
+        matrix[1][2] = 3;
         matrix[1][3] = 2;
-        matrix[2][0] = 0;
-        matrix[2][1] = 0;
+        matrix[2][0] = 2;
+        matrix[2][1] = 3;
         matrix[2][2] = 1;
         matrix[2][3] = 4;
 
@@ -98,31 +98,35 @@ public class LinearesGleichungsystem {
     }
 
     public static void loesen2() {
-        //loop fuer alle spalten ausser ganz rechte
-        for (int spalte_pivot = 0; spalte_pivot < spalte_anzahl-1; spalte_pivot++) {
-            int zeile_pivot = spalte_pivot;
-            int pivotFinden = -1;
+        //loop fuer alle pivoten [p][p] 
+        for (int pivot = 0; pivot < zeile_anzahl; pivot++) {
 
-            //vertauschen bis pivot !=0 ist
-            //TODO edgecases where theres only 0s => 0 solution / infinite solutions
-            for (int z = zeile_pivot; z < zeile_anzahl; z++) {
-                if (matrix[z][spalte_pivot] != 0) {
-                    pivotFinden = z;
-                    break;
+            //um ein pivot != 0 zu finden
+            if (matrix[pivot][pivot] == 0) {
+                int zeilNow = pivot + 1;
+                //TODO wenn alle zahlen unter pivot 0 sind
+                while (zeilNow < zeile_anzahl) { //alle zeile unter pivot
+                    if (matrix[zeilNow][pivot] != 0) {
+                        vertauschen(zeilNow, pivot);      //wenn ein pivot gefunden
+                        break;
+                    }
+                    zeilNow++;
                 }
             }
-            if (pivotFinden != -1 && pivotFinden != zeile_pivot) vertauschen(pivotFinden, zeile_pivot);
 
-            //pivot zu 1 multiplizieren
-            double pivotVal = matrix[zeile_pivot][spalte_pivot];
-            multiplizieren(zeile_pivot, 1/(pivotVal));
-
+            //pivot zu 1 multiplizieren wenn pivot != 0
+            if (matrix[pivot][pivot] != 0)
+                multiplizieren(pivot, 1/(matrix[pivot][pivot]));
+            
+                
             //spalten unter pivot nullen
-            for (int zeile = zeile_pivot+1; zeile < zeile_anzahl; zeile++) {
-                if (matrix[zeile][spalte_pivot] != 0) {
-                    addieren(zeile, zeile_pivot, -1*matrix[zeile][spalte_pivot]);
-                }
-            }
+
+            // for (int zeile = zeile_pivot+1; zeile < zeile_anzahl; zeile++) {
+            //     if (matrix[zeile][spalte_pivot] != 0) {
+            //         addieren(zeile, zeile_pivot, -1*matrix[zeile][spalte_pivot]);
+            //     }
+            // }
         }
+        ausgeben();
     }
 }
