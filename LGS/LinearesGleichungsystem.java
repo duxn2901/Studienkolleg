@@ -1,16 +1,20 @@
 import java.util.Scanner;
 
 public class LinearesGleichungsystem {
+    static Scanner scan = new Scanner(System.in);
+    static double EPS = 1e-9;
+    static double[][] matrix;
     
-    static double[][] matrix = new double[3][4];
-    static int zeile_anzahl = 3;
-    static int spalte_anzahl = 4;
+    static int zeile_anzahl;
+    static int spalte_anzahl;
     public static void main(String[] args) {
         // erstellen();
+        anzahlVariabelnGleichungenEingeben();
         eingeben();
         // loesen();
         loesen2();
         // ausgeben();
+        scan.close();
     }
 
     //nicht mehr gebraucht
@@ -78,16 +82,20 @@ public class LinearesGleichungsystem {
         //[0][0] 1 machen
         multiplizieren(0, 1/matrix[0][0]);
     }
+    public static void anzahlVariabelnGleichungenEingeben() {
+        System.out.println("anzahl von variabeln");
+        zeile_anzahl = scan.nextInt();
+        spalte_anzahl = zeile_anzahl + 1;
+        matrix = new double[zeile_anzahl][spalte_anzahl];
+    }
 
     public static void eingeben() {
-        Scanner scan = new Scanner(System.in);
         for (int zeile = 0; zeile < zeile_anzahl; zeile++) {
             for (int spalte = 0; spalte < spalte_anzahl; spalte++) {
                 System.out.println("matrix[" + zeile + "][" + spalte + "] = ");
                 matrix[zeile][spalte] = scan.nextDouble();
             }
         }
-        scan.close();
     }
 
     public static void vertauschen(int zeil1, int zeil2) {
@@ -108,11 +116,11 @@ public class LinearesGleichungsystem {
 
     public static int loesungPruefen(int zeil) {
         for (int spalt = 0; spalt < spalte_anzahl; spalt++) {
-            if (spalt != spalte_anzahl-1 && matrix[zeil][spalt] != 0) {
+            if (spalt != spalte_anzahl-1 && Math.abs(matrix[zeil][spalt]) > EPS) {
                 break;
             }
-            if (spalt == spalte_anzahl-1 && matrix[zeil][spalt] !=0) return 0;
-            if (spalt == spalte_anzahl-1 && matrix[zeil][spalt] ==0) return 2;
+            if (spalt == spalte_anzahl-1 && Math.abs(matrix[zeil][spalt]) < EPS) return 2;
+            if (spalt == spalte_anzahl-1 && Math.abs(matrix[zeil][spalt]) > EPS) return 0;
         }
         return 1;
         //0: keine loesung; 1: eine loesung; 2: unendliche loesung
@@ -125,11 +133,11 @@ public class LinearesGleichungsystem {
             ausgeben();
             //um ein pivot != 0 zu finden
             boolean pivotGefunden = true;
-            if (matrix[pivot][pivot] == 0) {
+            if (Math.abs(matrix[pivot][pivot]) < EPS) {
                 pivotGefunden = false;
                 int zeilNow = pivot + 1;
                 while (zeilNow < zeile_anzahl) { //alle zeile unter pivot
-                    if (matrix[zeilNow][pivot] != 0) {
+                    if (Math.abs(matrix[zeilNow][pivot]) > EPS) {
                         vertauschen(zeilNow, pivot);
                         pivotGefunden = true;
                                                       //wenn ein pivot gefunden
@@ -143,7 +151,7 @@ public class LinearesGleichungsystem {
             System.out.println("finding pivot != 0 of line " + (pivot+1)); //TODO entfernen
             ausgeben();
             //pivot zu 1 multiplizieren wenn pivot != 0
-            if (matrix[pivot][pivot] != 0)
+            if (Math.abs(matrix[pivot][pivot]) > EPS)
                 multiplizieren(pivot, 1/(matrix[pivot][pivot]));
             
             System.out.println("refactor pivot to 1 of line " + (pivot+1)); //TODO entfernen
@@ -151,7 +159,7 @@ public class LinearesGleichungsystem {
 
             //spalten unter pivot nullen
             for (int zeilNow = pivot+1; zeilNow < zeile_anzahl; zeilNow++) { //alle zeile unter pivot
-                if (matrix[zeilNow][pivot] != 0) { //wenn die zahl unter pivot != 0
+                if (Math.abs(matrix[pivot][pivot]) > EPS) { //wenn die zahl unter pivot != 0
                     addieren(zeilNow, pivot, -1*matrix[zeilNow][pivot]); //addieren von zeil pivot zu zeilNow
                 }
             }
@@ -160,7 +168,7 @@ public class LinearesGleichungsystem {
 
             //spalten oben pivot nullen
             for (int zeilNow = pivot-1; zeilNow >= 0; zeilNow--) { //alle zeile oben pivot
-                if (matrix[zeilNow][pivot] != 0) { //wenn die zahl oben pivot != 0
+                if (Math.abs(matrix[pivot][pivot]) > EPS) { //wenn die zahl oben pivot != 0
                     addieren(zeilNow, pivot, -1*matrix[zeilNow][pivot]); //addieren von zeil pivot zu zeilNow
                 }
             }
