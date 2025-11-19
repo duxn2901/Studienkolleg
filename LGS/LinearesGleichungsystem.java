@@ -106,22 +106,39 @@ public class LinearesGleichungsystem {
         }
     }
 
+    public static int loesungPruefen(int zeil) {
+        for (int spalt = 0; spalt < spalte_anzahl; spalt++) {
+            if (spalt != spalte_anzahl-1 && matrix[zeil][spalt] != 0) {
+                break;
+            }
+            if (spalt == spalte_anzahl-1 && matrix[zeil][spalt] !=0) return 0;
+            if (spalt == spalte_anzahl-1 && matrix[zeil][spalt] ==0) return 2;
+        }
+        return 1;
+        //0: keine loesung; 1: eine loesung; 2: unendliche loesung
+    }
+
     public static void loesen2() {
         //loop fuer alle pivoten [p][p] 
         for (int pivot = 0; pivot < zeile_anzahl; pivot++) {
             System.out.println("loop for pivot of line " + (pivot+1)); //TODO entfernen
             ausgeben();
             //um ein pivot != 0 zu finden
+            boolean pivotGefunden = true;
             if (matrix[pivot][pivot] == 0) {
+                pivotGefunden = false;
                 int zeilNow = pivot + 1;
-                //TODO wenn alle zahlen unter pivot 0 sind
                 while (zeilNow < zeile_anzahl) { //alle zeile unter pivot
                     if (matrix[zeilNow][pivot] != 0) {
-                        vertauschen(zeilNow, pivot);      //wenn ein pivot gefunden
+                        vertauschen(zeilNow, pivot);
+                        pivotGefunden = true;
+                                                      //wenn ein pivot gefunden
                         break;
                     }
                     zeilNow++;
                 }
+
+                if (!pivotGefunden) continue;
             }
             System.out.println("finding pivot != 0 of line " + (pivot+1)); //TODO entfernen
             ausgeben();
@@ -150,6 +167,21 @@ public class LinearesGleichungsystem {
             System.out.println("remove all numbers on top of pivot of line " + (pivot+1)); //TODO entfernen
             ausgeben();
         }
-        loesungablesen();
+
+        boolean hatLoesung = true;
+        for (int zeil = 0; zeil < zeile_anzahl; zeil++) {
+            if (loesungPruefen(zeil) == 0) {
+                System.out.println("keine loesung");
+                hatLoesung = false;
+                break;
+            }
+            if (loesungPruefen(zeil) == 2) {
+                System.out.println("unendliche loesung");
+                hatLoesung = false;
+                break;
+            }
+        }
+        if (hatLoesung) loesungablesen();
+        
     }
 }
