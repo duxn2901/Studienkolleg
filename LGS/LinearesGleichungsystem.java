@@ -83,9 +83,10 @@ public class LinearesGleichungsystem {
         multiplizieren(0, 1/matrix[0][0]);
     }
     public static void anzahlVariabelnGleichungenEingeben() {
-        System.out.println("anzahl von variabeln");
+        System.out.println("Anzahl von Gleichungen");
         zeile_anzahl = scan.nextInt();
-        spalte_anzahl = zeile_anzahl + 1;
+        System.out.println("anzahl von variabeln");
+        spalte_anzahl = scan.nextInt() + 1;
         matrix = new double[zeile_anzahl][spalte_anzahl];
     }
 
