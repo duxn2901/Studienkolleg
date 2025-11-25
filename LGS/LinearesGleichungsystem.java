@@ -128,52 +128,62 @@ public class LinearesGleichungsystem {
     }
 
     public static void loesen2() {
-        //loop fuer alle pivoten [p][p] 
-        for (int pivot = 0; pivot < zeile_anzahl; pivot++) {
-            System.out.println("loop for pivot of line " + (pivot+1)); //TODO entfernen
+        //loop fuer alle pivoten fuer jede zeile
+        for (int row = 0; row < zeile_anzahl; row++) {
+            System.out.println("loop for pivot of line " + (row+1)); //TODO entfernen
             ausgeben();
             //um ein pivot != 0 zu finden
-            boolean pivotGefunden = true;
-            if (Math.abs(matrix[pivot][pivot]) < EPS) {
-                pivotGefunden = false;
-                int zeilNow = pivot + 1;
-                while (zeilNow < zeile_anzahl) { //alle zeile unter pivot
-                    if (Math.abs(matrix[zeilNow][pivot]) > EPS) {
-                        vertauschen(zeilNow, pivot);
-                        pivotGefunden = true;
-                                                      //wenn ein pivot gefunden
+            boolean pivotGefunden = false;
+            boolean hatLoesung = true;
+            double pivot = 0;
+            for (int col = 0; col < spalte_anzahl - 1; col++) {
+                pivot = matrix[row][col];
+                if (Math.abs(pivot) < EPS) {
+                    continue;
+                }
+                if (col == spalte_anzahl -1) {
+                    if (Math.abs(pivot) > EPS) {
+                        hatLoesung = false;
                         break;
                     }
-                    zeilNow++;
-                }
-
-                if (!pivotGefunden) continue;
+                }       
+                pivotGefunden = true;
+                break;
             }
-            System.out.println("finding pivot != 0 of line " + (pivot+1)); //TODO entfernen
+
+            if (!hatLoesung) {
+                ausgeben();
+                System.out.println("keine loesung");
+                break;
+            }
+
+            if (!pivotGefunden) continue;
+            
+            System.out.println("finding pivot != 0 of line " + (row+1)); //TODO entfernen
             ausgeben();
             //pivot zu 1 multiplizieren wenn pivot != 0
-            if (Math.abs(matrix[pivot][pivot]) > EPS)
-                multiplizieren(pivot, 1/(matrix[pivot][pivot]));
+            if (Math.abs(pivot) > EPS)
+                multiplizieren(row, 1/(pivot));
             
-            System.out.println("refactor pivot to 1 of line " + (pivot+1)); //TODO entfernen
+            System.out.println("refactor pivot to 1 of line " + (row+1)); //TODO entfernen
             ausgeben();
 
             //spalten unter pivot nullen
-            for (int zeilNow = pivot+1; zeilNow < zeile_anzahl; zeilNow++) { //alle zeile unter pivot
-                if (Math.abs(matrix[pivot][pivot]) > EPS) { //wenn die zahl unter pivot != 0
-                    addieren(zeilNow, pivot, -1*matrix[zeilNow][pivot]); //addieren von zeil pivot zu zeilNow
+            for (int zeilNow = row+1; zeilNow < zeile_anzahl; zeilNow++) { //alle zeile unter pivot
+                if (Math.abs(pivot) > EPS) { //wenn die zahl unter pivot != 0
+                    addieren(zeilNow, row, -1*matrix[zeilNow][row]); //addieren von zeil pivot zu zeilNow
                 }
             }
-            System.out.println("remove all numbers under pivot of line " + (pivot+1)); //TODO entfernen
+            System.out.println("remove all numbers under pivot of line " + (row+1)); //TODO entfernen
             ausgeben();
 
             //spalten oben pivot nullen
-            for (int zeilNow = pivot-1; zeilNow >= 0; zeilNow--) { //alle zeile oben pivot
-                if (Math.abs(matrix[pivot][pivot]) > EPS) { //wenn die zahl oben pivot != 0
-                    addieren(zeilNow, pivot, -1*matrix[zeilNow][pivot]); //addieren von zeil pivot zu zeilNow
+            for (int zeilNow = row-1; zeilNow >= 0; zeilNow--) { //alle zeile oben pivot
+                if (Math.abs(matrix[row][row]) > EPS) { //wenn die zahl oben pivot != 0
+                    addieren(zeilNow, row, -1*matrix[zeilNow][row]); //addieren von zeil pivot zu zeilNow
                 }
             }
-            System.out.println("remove all numbers on top of pivot of line " + (pivot+1)); //TODO entfernen
+            System.out.println("remove all numbers on top of pivot of line " + (row+1)); //TODO entfernen
             ausgeben();
         }
 
