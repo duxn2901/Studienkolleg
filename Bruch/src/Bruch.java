@@ -32,5 +32,11 @@ public class Bruch{
         return multiplizieren(br.kehrenBruch());
     }
 
+    // public Bruch kuerzen() {
+    //     return 
+    // }
 
+    // public static int findenGCD(int a, int b) {
+    //     return
+    // }
 }
