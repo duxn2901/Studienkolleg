@@ -39,4 +39,16 @@ public class Bruch{
     // public static int findenGCD(int a, int b) {
     //     return
     // }
+
+    // public Bruch addieren(Bruch br) {
+    //     return
+    // }
+
+    // public Bruch subtrahieren(Bruch br) {
+    //     return
+    // }
+
+    // public Bruch nennenGleichen(Bruch br) {
+    //     return
+    // }
 }
