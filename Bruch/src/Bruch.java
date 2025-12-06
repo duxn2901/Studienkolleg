@@ -63,4 +63,10 @@ public class Bruch{
     // public Bruch nennenGleichen(Bruch br) {
     //     return
     // }
+
+    public int LCMFinden(int a, int b) {
+        a = Math.abs(a);
+        b = Math.abs(b);
+        return (a*b) / GCDFinden(a, b);
+    }
 }
