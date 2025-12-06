@@ -12,7 +12,7 @@ public class Bruch{
         // System.out.println(br4);
         Bruch br5 = new Bruch(-5,6);
         Bruch br6 = new Bruch(9, 24);
-        System.out.println(br5.addieren(br6));
+        System.out.println(br5.subtrahieren(br6));
     }
 
 
@@ -62,9 +62,12 @@ public class Bruch{
         return summe.kuerzen();
     }
 
-    // public Bruch subtrahieren(Bruch br) {
-    //     return
-    // }
+    public Bruch subtrahieren(Bruch br) {
+        Bruch br1 = this.nennenAngleichen(br);
+        Bruch br2 = br.nennenAngleichen(br1);
+        Bruch differenz = new Bruch(br1.zaehler-br2.zaehler, br1.nenner);
+        return differenz.kuerzen();
+    }
 
     public Bruch nennenAngleichen(Bruch br) {
         int lcm = LCMFinden(br.nenner, nenner);       
