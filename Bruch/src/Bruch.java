@@ -41,17 +41,15 @@ public class Bruch{
         return new Bruch(zaehler / gcd, nenner / gcd);
     }
 
-    public static int GCDFinden(int a, int b) {
-        int gcd = -1;
-        if (a==b) return a;
-        int min = (a < b)? a : b;
-        for (int i = min/2+1; i > 1; i--) {
-            if (a % i == 0 && b % i == 0) {
-                gcd = i;
-                break;
-            }
+    public static int GCDFinden(int a, int b) {    
+        a = Math.abs(a);
+        b = Math.abs(b);
+        while (b != 0) {
+            int temp = b;
+            b = a%b;
+            a = temp;
         }
-        return gcd;
+        return a;
     }
 
     // public Bruch addieren(Bruch br) {
