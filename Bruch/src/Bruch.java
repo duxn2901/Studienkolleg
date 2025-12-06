@@ -10,9 +10,9 @@ public class Bruch{
         // Bruch br4 = new Bruch(12,2);
         // br4 = br4.kuerzen();
         // System.out.println(br4);
-        Bruch br5 = new Bruch(7,6);
-        Bruch br6 = new Bruch(1,13);
-        System.out.println(br5.nennenAngleichen(br6));
+        Bruch br5 = new Bruch(-5,6);
+        Bruch br6 = new Bruch(9, 24);
+        System.out.println(br5.addieren(br6));
     }
 
 
@@ -55,9 +55,12 @@ public class Bruch{
         return a;
     }
 
-    // public Bruch addieren(Bruch br) {
-    //     return
-    // }
+    public Bruch addieren(Bruch br) {
+        Bruch br1 = this.nennenAngleichen(br);
+        Bruch br2 = br.nennenAngleichen(br1);
+        Bruch summe = new Bruch(br1.zaehler+br2.zaehler, br1.nenner);
+        return summe.kuerzen();
+    }
 
     // public Bruch subtrahieren(Bruch br) {
     //     return
