@@ -4,15 +4,15 @@ public class Bruch{
         // System.out.println(br1);
         // Bruch br2 = br1.multiplizieren(new Bruch(4,6));
         // System.out.println(br2);
-        // System.out.println(br1);
-        // Bruch br3 = br1.dividieren(new Bruch(4,6));
-        // System.out.println(br3);
-        // Bruch br4 = new Bruch(12,2);
-        // br4 = br4.kuerzen();
-        // System.out.println(br4);
-        Bruch br5 = new Bruch(-5,6);
-        Bruch br6 = new Bruch(9, 24);
-        System.out.println(br5.subtrahieren(br6));
+        // // System.out.println(br1);
+        // // Bruch br3 = br1.dividieren(new Bruch(4,6));
+        // // System.out.println(br3);
+        // // Bruch br4 = new Bruch(12,2);
+        // // br4 = br4.kuerzen();
+        // // System.out.println(br4);
+        // Bruch br5 = new Bruch(-5,6);
+        // Bruch br6 = new Bruch(9, 24);
+        // System.out.println(br5.subtrahieren(br6));
     }
 
 
@@ -28,7 +28,7 @@ public class Bruch{
     }
 
     public Bruch multiplizieren(Bruch br) {
-        return new Bruch(zaehler*br.zaehler, nenner*br.nenner);
+        return new Bruch(zaehler*br.zaehler, nenner*br.nenner).kuerzen();
     }
 
     public Bruch kehrenBruch() {
