@@ -9,9 +9,9 @@ public class Vektor {
         System.out.println(v1.kreuzproduktMultiplizieren(v2));
     }
 
-    double[] koord = new double[3];
+    Bruch[] koord = new Bruch[3];
 
-    public Vektor(double[] v) {
+    public Vektor(Bruch[] v) {
         this.koord = v;
     }
 
