@@ -45,9 +45,9 @@ public class Vektor {
 
     public Vektor kreuzproduktMultiplizieren(Vektor v) {
         Vektor ergebnis = new Vektor(new double[3]);
-        ergebnis.koord[0] = this.koord[1] * v.koord[2] - this.koord[2] * v.koord[1];
-        ergebnis.koord[1] = this.koord[2] * v.koord[0] - this.koord[0] * v.koord[2];
-        ergebnis.koord[2] = this.koord[0] * v.koord[1] - this.koord[1] * v.koord[0];
+        for (int i = 0; i < 3; i++) {
+            ergebnis.koord[i] = this.koord[(i+1)%3] * v.koord[(i+2)%3] - this.koord[(i+2)%3] * v.koord[(i+1)%3];
+        }
         return ergebnis;
     }
 }
