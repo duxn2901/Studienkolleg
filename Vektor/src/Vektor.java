@@ -6,6 +6,7 @@ public class Vektor {
         System.out.println(v1.skalarproduktMultiplizieren(v2));
         System.out.println(v1.faktorMultiplizieren(2));
         System.out.println(v1);
+        System.out.println(v1.kreuzproduktMultiplizieren(v2));
     }
 
     double[] koord = new double[3];
@@ -39,6 +40,14 @@ public class Vektor {
         for (int i = 0; i < 3; i++) {
             ergebnis.koord[i] = this.koord[i] * d;
         }
+        return ergebnis;
+    }
+
+    public Vektor kreuzproduktMultiplizieren(Vektor v) {
+        Vektor ergebnis = new Vektor(new double[3]);
+        ergebnis.koord[0] = this.koord[1] * v.koord[2] - this.koord[2] * v.koord[1];
+        ergebnis.koord[1] = this.koord[2] * v.koord[0] - this.koord[0] * v.koord[2];
+        ergebnis.koord[2] = this.koord[0] * v.koord[1] - this.koord[1] * v.koord[0];
         return ergebnis;
     }
 }
