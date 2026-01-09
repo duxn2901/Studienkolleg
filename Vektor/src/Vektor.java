@@ -9,7 +9,7 @@ public class Vektor {
 
         Vektor v1 = new Vektor(new Bruch[] {br1, br2, br3});
         Vektor v2 = new Vektor(new Bruch[] {br4, br5, br6});
-        System.out.println(v1.addieren(v2));
+        System.out.println(v1.vektorAddieren(v2));
         System.out.println(v1.skalarproduktMultiplizieren(v2));
         System.out.println(v1.faktorMultiplizieren(2));
         System.out.println(v1);
@@ -26,7 +26,7 @@ public class Vektor {
         return "(" + koord[0] + ", " + koord[1] + ", " + koord[2] + ")";
     }
 
-    public Vektor addieren(Vektor v) {
+    public Vektor vektorAddieren(Vektor v) {
         Vektor ergebnis = new Vektor(new Bruch[3]);
         for (int i = 0; i < 3; i++) {
             ergebnis.koord[i] = this.koord[i].addieren(v.koord[i]);
@@ -34,10 +34,10 @@ public class Vektor {
         return ergebnis;
     }
 
-    public double skalarproduktMultiplizieren(Vektor v) {
-        double ergebnis = 0;
+    public Bruch skalarproduktMultiplizieren(Vektor v) {
+        Bruch ergebnis = new Bruch(0,1);
         for (int i = 0; i < 3; i++) {
-            ergebnis += this.koord[i] * v.koord[i];
+            ergebnis.addieren(this.koord[i].multiplizieren(v.koord[i]));
         }
         return ergebnis;
     }
